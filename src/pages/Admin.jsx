@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Cog } from "lucide-react";
 
 import AgregarItem from "@/components/admin/AgregarItem.jsx";
+import Dashboard from "@/components/admin/Dashboard.jsx";
 
 const tabs = [
-  { label: "Agregar Item", valor: "agregar", Componente: AgregarItem },
+  { label: "Dashboard", valor: "dashboard", Componente: Dashboard },
+  { label: "Agregar Item", valor: "agregar", Componente: AgregarItem }
 ];
 
 export default function Admin() {
-  const [tabActivo, setTabActivo] = useState("agregar");
+  const [tabActivo, setTabActivo] = useState("dashboard");
 
   const tabSeleccionado = tabs.find((tab) => tab.valor === tabActivo);
   const ComponenteActivo = tabSeleccionado.Componente;
