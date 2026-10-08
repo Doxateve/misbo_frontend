@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import { useCarrito } from "../context/useCarrito";
@@ -42,11 +41,23 @@ export default function Navbar() {
         {cargando ? (
           <span className="text-sm text-zinc-500">...</span>
         ) : usuario ? (
-          <Link to="/perfil">
-            <span className="text-sm text-zinc-300 hover:text-white">
-              Hola, <span className="text-purple-400">{usuario.username}</span>
-            </span>
-          </Link>
+          <>
+            <Link to="/perfil">
+              <span className="text-sm text-zinc-300 hover:text-white">
+                Hola,{" "}
+                <span className="text-purple-400">{usuario.username}</span>
+              </span>
+            </Link>
+            {usuario?.rol === "admin" ? (
+              <Link to="/admin">
+              <span className="text-sm text-zinc-300 hover:text-white">
+                Admin
+              </span>
+            </Link>
+            ) : (
+              <></>
+            )}
+          </>
         ) : (
           <Button
             asChild

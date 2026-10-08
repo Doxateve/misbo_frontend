@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import { Cog } from "lucide-react";
 
@@ -6,14 +7,21 @@ import Dashboard from "@/components/admin/Dashboard.jsx";
 
 const tabs = [
   { label: "Dashboard", valor: "dashboard", Componente: Dashboard },
-  { label: "Agregar Item", valor: "agregar", Componente: AgregarItem }
+  { label: "Agregar Item", valor: "agregar", Componente: AgregarItem },
 ];
 
+import { useAuth } from "@/context/useAuth";
+
 export default function Admin() {
+  const { usuario } = useAuth();
+
   const [tabActivo, setTabActivo] = useState("dashboard");
 
   const tabSeleccionado = tabs.find((tab) => tab.valor === tabActivo);
   const ComponenteActivo = tabSeleccionado.Componente;
+
+  if (!usuario) return <Navigate to="/login" replace />;
+  if (usuario.rol !== "admin") return <Navigate to="/" replace />;
 
   return (
     <div>
