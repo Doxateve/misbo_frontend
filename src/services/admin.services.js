@@ -12,3 +12,15 @@ export async function obtenerItems() {
   // Deveulve los items
   return data.items;
 }
+
+export async function obtenerDashboard() {
+  const res = await fetch("/api/admin/dashboard", { credentials: "include" });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+
+  return data.dashboard;
+}
